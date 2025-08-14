@@ -1,16 +1,19 @@
 import './App.css'
-import './TodoList.jsx'
 import TodoList from './TodoList.jsx'
 import TodoForm from './TodoForm.jsx'
 import { useState } from 'react'
 function App() {
-  const [newTodo, setNewTodo] = useState("short string example")
+  const [todoList, setTodoList] = useState([])
+
+  function handleAddTodo(title){
+    const newTodo = {title: title, id: Date.now()}
+    setTodoList([...todoList, newTodo])
+  }
   return (
     <div>
       <h1>My To Do List</h1>
-      < TodoForm />
-      <p>{newTodo}</p>
-      < TodoList />
+      <TodoForm onAddTodo={handleAddTodo} />
+      <TodoList todoList={todoList} />
     </div>
   )
 }
